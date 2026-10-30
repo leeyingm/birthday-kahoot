@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Cuánto me conoces? — Birthday Kahoot</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="bg-shapes" aria-hidden="true">
+  <span></span><span></span><span></span><span></span>
+</div>
+
+<!-- PANTALLA 1: entrar -->
+<section id="screen-join" class="screen active">
+  <div class="card join-card">
+    <div class="logo-badge">🎂</div>
+    <h1>¿Cuánto <span class="accent">me conoces?</span></h1>
+    <p class="subtitle">Birthday Kahoot · hasta 12 jugadores</p>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="join" role="tab">Unirme</button>
+      <button class="tab" data-tab="host" role="tab">Crear sala</button>
+    </div>
+
+    <form id="form-join" class="tab-panel active">
+      <label for="join-code">Código de la sala</label>
+      <input id="join-code" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="off">
+      <label for="join-name">Tu nombre</label>
+      <input id="join-name" maxlength="16" placeholder="Cómo te llamas" autocomplete="off">
+      <button type="submit" class="btn btn-big btn-blue">ENTRAR AL JUEGO</button>
+    </form>
+
+    <form id="form-host" class="tab-panel">
+      <label for="host-name">Tu nombre (anfitrión)</label>
+      <input id="host-name" maxlength="16" placeholder="Cómo te llamas" autocomplete="off">
+      <button type="submit" class="btn btn-big btn-pink">CREAR SALA</button>
+      <p class="hint">Se generará un código para que tus amigos entren desde su celular.</p>
+    </form>
+
+    <p id="join-error" class="error" role="alert"></p>
+  </div>
+</section>
+
+<!-- PANTALLA 2: sala de espera -->
+<section id="screen-lobby" class="screen">
+  <div class="card lobby-card">
+    <p class="kicker">CÓDIGO DE LA SALA</p>
+    <div id="room-code" class="room-code">------</div>
+    <p class="hint">Entren en el mismo sitio y escriban este código</p>
+
+    <h2 class="players-title">Jugadores <span id="player-count">0/12</span></h2>
+    <ul id="lobby-players" class="player-grid"></ul>
+
+    <button id="btn-start" class="btn btn-big btn-green" hidden>¡EMPEZAR PARTIDA!</button>
+    <p id="lobby-wait" class="hint">Esperando a que el anfitrión empiece…</p>
+    <button id="btn-leave" class="btn btn-ghost">Salir de la sala</button>
+  </div>
+</section>
+
+<!-- PANTALLA 3: pregunta -->
+<section id="screen-game" class="screen">
+  <div class="game-top">
+    <span id="q-counter" class="chip">1 / 20</span>
+    <span id="q-points" class="chip">0 pts</span>
+  </div>
+
+  <div class="timer-wrap">
+    <div class="timer-ring">
+      <svg viewBox="0 0 80 80" aria-hidden="true">
+        <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+        <circle id="ring-fg" class="ring-fg" cx="40" cy="40" r="34"></circle>
+      </svg>
+      <span id="timer-num">15</span>
+    </div>
+    <p id="answer-count" class="chip-small">0/0 contestaron</p>
+  </div>
+
+  <div class="question-box">
+    <h2 id="q-text">…</h2>
+  </div>
+
+  <div id="options" class="options"></div>
+
+  <div id="reveal-box" class="reveal-box" hidden>
+    <p id="reveal-msg"></p>
+  </div>
+
+  <div id="mini-rank" class="mini-rank" hidden></div>
+</section>
+
+<!-- PANTALLA 4: resultado final -->
+<section id="screen-final" class="screen">
+  <div class="card final-card">
+    <div class="trophy">🏆</div>
+    <h2>¡Resultado final!</h2>
+    <div id="podium" class="podium"></div>
+    <ol id="final-rank" class="rank-list"></ol>
+    <div class="final-actions">
+      <button id="btn-again" class="btn btn-big btn-pink" hidden>JUGAR OTRA VEZ</button>
+      <button id="btn-exit" class="btn btn-ghost">Salir</button>
+    </div>
+  </div>
+</section>
+
+<div id="toast" class="toast" role="status"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "birthday-kahoot",
+  "version": "1.0.0",
+  "description": "Kahoot-style birthday quiz for up to 12 players in real time",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
